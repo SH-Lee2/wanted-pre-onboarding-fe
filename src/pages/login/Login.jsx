@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import useInput from "../../hooks/use-input";
 import { login } from "../../services/auth";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    const navigate = useNavigate()
+	const navigate = useNavigate();
 	const {
 		value: enteredEmail,
 		isValid: enteredEmailIsValid,
@@ -28,16 +28,17 @@ const Login = () => {
 		reset: resetPasswordInput,
 	} = useInput((value) => value.trim() !== "" && value.length >= 8);
 
-	const submitHandler = async(event) => {
+	const submitHandler = async (event) => {
 		event.preventDefault();
-        const res = await login(enteredEmail, enteredPassword)
-        if(res.status === 200){
-            navigate("/todo")
-        }else{
-            // modal 알림
-            resetemailInput()
-            resetPasswordInput()
-        }
+		const res = await login(enteredEmail, enteredPassword);
+		if (res?.status === 200) {
+			navigate("/todo");
+		} else {
+			// modal 알림
+			console.log(res.data.message);
+			resetemailInput();
+			resetPasswordInput();
+		}
 	};
 
 	let form = false;
@@ -54,9 +55,11 @@ const Login = () => {
 						placeholder="이메일을 입력해주세요."
 						value={enteredEmail}
 						onChange={emailChangedHandler}
-                        onBlur={emailBlurHandler}
+						onBlur={emailBlurHandler}
 					/>
-                    {emailInputHasError && <p>이메일 형식에 맞게 입력해주세요.</p>}
+					{emailInputHasError && (
+						<p>이메일 형식에 맞게 입력해주세요.</p>
+					)}
 				</InputWrapperTag>
 				<InputWrapperTag>
 					<label htmlFor="password">비밀번호</label>
@@ -65,9 +68,11 @@ const Login = () => {
 						placeholder="비밀번호를 입력해주세요."
 						value={enteredPassword}
 						onChange={passwordChangedHandler}
-                        onBlur={passwordBlurHandler}
+						onBlur={passwordBlurHandler}
 					/>
-                    {passwordInputHasError && <p>비밀번호 8자리 이상 입력해주세요.</p>}
+					{passwordInputHasError && (
+						<p>비밀번호 8자리 이상 입력해주세요.</p>
+					)}
 				</InputWrapperTag>
 				<button type="submit" disabled={!form}>
 					로그인
@@ -79,30 +84,30 @@ const Login = () => {
 
 export default Login;
 
-const FormTag = styled.form`
+export const FormTag = styled.form`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-    height: 70%;
+	height: 70%;
 	width: 100%;
 	row-gap: 2em;
 	button {
-        font-size: 1rem;
-        background-color: #9563fb;
+		font-size: 1rem;
+		background-color: #9563fb;
 		border: none;
-        color: #fff;
-        padding: .5em 1em;
-        border-radius: 5px;
-        transition: .5s;
+		color: #fff;
+		padding: 0.5em 1em;
+		border-radius: 5px;
+		transition: 0.5s;
 		:disabled {
-            background-color: gray;
+			background-color: gray;
 		}
 	}
 `;
-const InputWrapperTag = styled.div`
+export const InputWrapperTag = styled.div`
 	display: flex;
-	row-gap: .75em;
-    flex-direction: column;
+	row-gap: 0.75em;
+	flex-direction: column;
 	label {
 		font-size: 1.2rem;
 		color: #9563fb;
@@ -115,8 +120,8 @@ const InputWrapperTag = styled.div`
 			outline-color: #9563fb;
 		}
 	}
-    p{
-        font-size: .8rem;
-        color: red;
-    }
+	p {
+		font-size: 0.8rem;
+		color: red;
+	}
 `;
