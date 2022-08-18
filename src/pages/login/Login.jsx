@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import useInput from "../../hooks/use-input";
+import { login } from "../../services/auth";
+import {useNavigate} from "react-router-dom"
 
 const Login = () => {
+    const navigate = useNavigate()
 	const {
 		value: enteredEmail,
 		isValid: enteredEmailIsValid,
@@ -25,8 +28,16 @@ const Login = () => {
 		reset: resetPasswordInput,
 	} = useInput((value) => value.trim() !== "" && value.length >= 8);
 
-	const submitHandler = (event) => {
+	const submitHandler = async(event) => {
 		event.preventDefault();
+        const res = await login(enteredEmail, enteredPassword)
+        if(res.status === 200){
+            navigate("/todo")
+        }else{
+            // modal 알림
+            resetemailInput()
+            resetPasswordInput()
+        }
 	};
 
 	let form = false;
