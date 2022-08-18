@@ -19,4 +19,9 @@ export default Layout;
 
 const MainTag = styled.main`
 	flex: 1;
+    padding: 1em 2em;
+	@media screen and (min-width: 768px) {
+		min-width: 768px;
+		margin: 0 auto;
+	}
 `;
