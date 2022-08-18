@@ -10,8 +10,22 @@ export const login = async(email,password) => {
             password
         })
         const {access_token} = res.data
-        localStorage.set("token",JSON.stringify(access_token))
-        return res.status
+        localStorage.setItem("token",JSON.stringify(access_token))
+        return res
+    }catch(error){
+        return error.response
+    }
+}
+
+export const join = async(email,password) => {
+    try{
+        const res = await axios.post(`${BASE_URL}auth/signup`,{
+            email,
+            password
+        })
+        const {access_token} = res.data
+        localStorage.setItem("token",JSON.stringify(access_token))
+        return res 
     }catch(error){
         return error.response
     }
