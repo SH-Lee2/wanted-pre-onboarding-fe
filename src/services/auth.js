@@ -9,8 +9,6 @@ export const login = async(email,password) => {
             email,
             password
         })
-        const {access_token} = res.data
-        localStorage.setItem("token",JSON.stringify(access_token))
         return res
     }catch(error){
         return error.response
@@ -23,8 +21,6 @@ export const join = async(email,password) => {
             email,
             password
         })
-        const {access_token} = res.data
-        localStorage.setItem("token",JSON.stringify(access_token))
         return res 
     }catch(error){
         return error.response

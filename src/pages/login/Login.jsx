@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import useInput from "../../hooks/use-input";
-import { login } from "../../services/auth";
-import { useNavigate } from "react-router-dom";
+import AuthContext from "../../store/auth_context";
 
 const Login = () => {
-	const navigate = useNavigate();
+	const { onLoginAndJoin } = useContext(AuthContext);
 	const {
 		value: enteredEmail,
 		isValid: enteredEmailIsValid,
@@ -30,15 +29,9 @@ const Login = () => {
 
 	const submitHandler = async (event) => {
 		event.preventDefault();
-		const res = await login(enteredEmail, enteredPassword);
-		if (res?.status === 200) {
-			navigate("/todo");
-		} else {
-			// modal 알림
-			console.log(res.data.message);
-			resetemailInput();
-			resetPasswordInput();
-		}
+		onLoginAndJoin("login",enteredEmail, enteredPassword);
+		resetemailInput();
+		resetPasswordInput();
 	};
 
 	let form = false;
