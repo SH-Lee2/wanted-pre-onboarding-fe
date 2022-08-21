@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import AuthContext from "../store/auth_context";
 const Header = () => {
+	const {isLoggedIn, onLogout} = useContext(AuthContext)
 	return (
 		<HeaderTag>
 			<div>
@@ -9,12 +11,18 @@ const Header = () => {
 			</div>
 			<nav>
 				<ul>
-					<li>
-						<Link to="/">로그인</Link>
-					</li>
-					<li>
-						<Link to="join">회원가입</Link>
-					</li>
+					{isLoggedIn ? (
+						<li onClick={onLogout}>로그아웃</li>
+					) : (
+						<>
+							<li>
+								<Link to="/">로그인</Link>
+							</li>
+							<li>
+								<Link to="join">회원가입</Link>
+							</li>
+						</>
+					)}
 				</ul>
 			</nav>
 		</HeaderTag>
