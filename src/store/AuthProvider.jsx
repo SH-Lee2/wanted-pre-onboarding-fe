@@ -19,9 +19,12 @@ export const AuthProvider = (props) => {
 
 	const loginAndJoinHandler = async(type, email, password) => {
         const res = type === "login" ? await login(email, password) : await join(email, password)
-        //  error 처리 
-		localStorage.setItem("token", res.data.access_token);
-		setIsLoggedIn(true);
+        if(res.status === 200 || res.status ===201){
+            localStorage.setItem("token", res.data.access_token);
+            setIsLoggedIn(true);
+        }else{
+            window.alert(res.data.message)
+        }
 	};
 
 	return (
