@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import AddTodo from "../../components/add_todo/AddTodo";
 import LoadingSpinner from "../../components/loading_spinner/LoadingSpinner";
@@ -10,18 +9,11 @@ import {
 	getTodos,
 	updateTodo,
 } from "../../services/todo";
-import AuthContext from "../../store/auth_context";
 
 const Todo = () => {
 	const [todos, setTodos] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
-	const { isLoggedIn } = useContext(AuthContext);
-	const navigate = useNavigate();
-	useEffect(() => {
-		if (!isLoggedIn) {
-			navigate("/");
-		}
-	}, [isLoggedIn, navigate]);
+
 	useEffect(() => {
 		const getTodoLIst = async () => {
 			setIsLoading(true);
