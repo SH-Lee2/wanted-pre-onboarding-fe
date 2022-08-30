@@ -1,7 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
-import Join from "./pages/join/Join";
-import Login from "./pages/login/Login";
+import Home from "./pages/home/Home";
 import Todo from "./pages/todo/Todo";
 import GlobalStyles from "./styles/GlobalStyles";
 import PrivateRoutes from "./utils/PrivateRoutes";
@@ -14,8 +13,8 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Layout />}>
 					<Route element={<PublicRoutes />}>
-						<Route index element={<Login />} />
-						<Route path="join" element={<Join />} />
+						<Route index element={<Home />} />
+						<Route path="join" element={<Home />} />
 					</Route>
 					<Route element={<PrivateRoutes />}>
 						<Route path="todo" element={<Todo />} />
