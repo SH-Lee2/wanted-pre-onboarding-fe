@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const BASE_URL = 'https://5co7shqbsf.execute-api.ap-northeast-2.amazonaws.com/production'
+const BASE_URL = process.env.REACT_APP_BASE_URL
 
 // todo 추가
 export const createTodo = async(data) => {
