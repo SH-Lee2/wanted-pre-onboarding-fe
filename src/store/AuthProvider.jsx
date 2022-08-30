@@ -23,7 +23,7 @@ export const AuthProvider = (props) => {
             localStorage.setItem("token", res.data.access_token);
             setIsLoggedIn(true);
         }else{
-            window.alert(res.data.message)
+            window.alert(res.data?.message)
         }
 	};
 
